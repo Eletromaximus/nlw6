@@ -11,5 +11,7 @@ export function ensureAdmin (
     return next()
   }
 
-  return response.status(401)
+  return response.status(401).json({
+    error: 'unauthorized'
+  })
 }
