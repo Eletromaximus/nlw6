@@ -2,6 +2,7 @@ import 'reflect-metadata'
 import express, { NextFunction, Request, Response } from 'express'
 import 'express-async-errors'
 
+import { CustomErrors } from './utils/CustomErrors'
 import { router } from './routes'
 
 import './database'
@@ -14,8 +15,8 @@ app.use(router)
 
 app.use(
   (err: Error, request: Request, response: Response, next:NextFunction) => {
-    if (err instanceof Error) {
-      return response.status(400).json({
+    if (err instanceof CustomErrors) {
+      return response.status(err.status).json({
         error: err.message
       })
     }
