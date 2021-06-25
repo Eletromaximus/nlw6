@@ -5,12 +5,12 @@ import { hash } from 'bcryptjs'
 interface IUserRequest {
   name: string;
   email: string;
-  admin: boolean;
+  admin?: boolean;
   password: string;
 }
 
 class CreateUserService {
-  async execute ({ name, email, admin, password }: IUserRequest) {
+  async execute ({ name, email, admin = false, password }: IUserRequest) {
     const usersRepositories = getCustomRepository(UsersRepositories)
 
     if (!email) {
